@@ -7,11 +7,16 @@ import App from './App'
 import '@/assets/css/base.css'
 import '@/assets/css/index.css'
 
+// 导入 store
+import store from './store'
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  store
+
 })

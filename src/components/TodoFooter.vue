@@ -1,7 +1,7 @@
 <template>
-  <footer class="footer">
+  <footer class="footer" v-if="isShowFooter">
       <!-- This should be `0 items left` by default -->
-      <span class="todo-count"><strong>0</strong> item left</span>
+      <span class="todo-count"><strong>{{leftCount}}</strong> item left</span>
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
         <li>
@@ -15,12 +15,24 @@
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->
-      <button class="clear-completed">Clear completed</button>
+      <button class="clear-completed"                       v-show="isShowCompleted"
+      @click="clearCompleted">Clear completed</button>
     </footer>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
+
+  methods: {
+    clearCompleted () {
+      this.$store.commit('clearCompleted')
+    }
+  },
+  computed: {
+    // { isShowFooter() {}, leftCount() {}, isShowClearCompleted() {} }
+    ...mapGetters(['isShowFooter', 'leftCount', 'isShowCompleted'])
+  }
 
 }
 </script>
